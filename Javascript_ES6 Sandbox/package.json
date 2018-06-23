@@ -1,0 +1,28 @@
+{
+  "name": "javascript_es6-sandbox",
+  "version": "1.0.0",
+  "description": "javascript sandbox",
+  "main": "bugseepivotalrecipe.js",
+  "scripts": {
+    "test": "console.log(output)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GlickG/ScriptSandbox.git"
+  },
+  "keywords": [
+    "javascript",
+    "print",
+    "console",
+    "es6"
+  ],
+  "author": "Glick",
+  "license": "(ISC)",
+  "bugs": {
+    "url": "https://github.com/GlickG/ScriptSandbox/issues"
+  },
+  "homepage": "https://github.com/GlickG/ScriptSandbox#readme",
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0"
+  }
+}
