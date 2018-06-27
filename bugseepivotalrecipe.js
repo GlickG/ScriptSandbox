@@ -80,14 +80,14 @@ function create(context) {
     }
 
     if (issue.reporter) {
-        description += `Reported by ${issue.reporter || `Anonymous`}\n`;
+        description += Reported by: ${issue.reporter || `Anonymous`}\n`;
     }
     
    
     description += `Device: ${device.manufacturer} ${device.model}\n`;
     description += `OS: ${platform.version}, ${platform.build}\n\n`;
     description += `View full Bugsee session at: ${issue.url}`;
-    description += `Reproduction Steps:`\n\n` 1.\n` 2.\n` 3.\n` 4.\n` 5.\n`;    
+    description += `Reproduction Steps:\n' 1.\n 2.\n 3.\n 4.\n 5.\n';    
   
 //logic ends here
   
@@ -116,7 +116,7 @@ function update(context, changes) {
         }
 
         if (issue.reporter) {
-            description += `Reported by ${issue.reporter}\n`;
+            description += `Reported by: ${issue.reporter}\n`,;
         }
 
         description += `View full Bugsee session at: ${issue.url}`;

@@ -1,10 +1,12 @@
 {
-  "name": "javascript_es6-sandbox",
+  "name": "sandbox_jsRecipes",
   "version": "1.0.0",
   "description": "javascript sandbox",
   "main": "bugseepivotalrecipe.js",
   "scripts": {
-    "test": "console.log(output)"
+    "build": "node bugseepivotalrecipe.js",
+    "test": "console.log(output)",
+    "lint": "`npm bin`/eslint ./",
   },
   "repository": {
     "type": "git",
@@ -25,12 +27,15 @@
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
     "eslint": "^5.0.0",
-    "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0"
   },
   "dependencies": {
-    "eslint-config-airbnb": "^17.0.0",
+    "babel-core": "^6.26.3",
+    "eslint-config-standard": "^12.0.0-alpha.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.10.0"
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-react": "^7.10.0",
+    "eslint-plugin-standard": "^3.1.0"
   }
 }
