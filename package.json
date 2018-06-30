@@ -1,33 +1,30 @@
 {
-  "name": "sandbox_jsRecipes",
+  "name": "ScriptSandbox",
   "version": "1.0.0",
   "description": "javascript sandbox",
   "main": "bugseepivotalrecipe.js",
   "scripts": {
     "build": "node bugseepivotalrecipe.js",
-    "test": "console.log(output)",
-    "lint": "`npm bin`/eslint ./",
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GlickG/ScriptSandbox.git"
+    "test": "console.log(output)"
   },
   "keywords": [
     "javascript",
     "print",
     "console",
-    "es6"
+    "es6"    
   ],
-  "author": "Glick",
-  "license": "(ISC)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GlickG/ScriptSandbox.git"
+  },
+  "author": "Garrett Glick <garrett.glick@smallplanet.com>",
   "bugs": {
     "url": "https://github.com/GlickG/ScriptSandbox/issues"
   },
   "homepage": "https://github.com/GlickG/ScriptSandbox#readme",
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
-    "eslint": "^5.0.0",
-    "eslint-plugin-import": "^2.13.0"
+    "eslint": "^5.0.0"
   },
   "dependencies": {
     "babel-core": "^6.26.3",
