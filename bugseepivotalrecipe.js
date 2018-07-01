@@ -67,34 +67,51 @@ function create(context) {
     const device = context.device;
     const app = context.app;
     let summary;
-    let description = issue.description;
     let labels = [`android, dev`];
 
-    if (issue.type == `crash`) {
-        summary = `CRASH: ${issue.summary || 'No summary'} [${device.model_name}, ${platform.type}, ${platform.version}]`;
-    }
-    
-    if (issue.type == 'bug') {
-        summary = `USER BUG: ${issue.summary || 'No summary'} [${device.model_name}, ${platform.type}, ${platform.version}]`;
-    
+//String Shortcuts for Summary
+    let CrashSummary = `**${platform.type} Crash:** ${issue.summary || 'Summarize what happened in two lines or less'}`;
+    let BugSummary =   `**${platform.type} Bug:** ${issue.summary || 'Summarize what happened in two lines or less'}`;
+    let deviceData = `_(${device.manufacturer} / ${platform.type} / ${platform.version})_`;
+
+//Strings Shortcuts for Description
+    let h2CurrentEntry = `### Current State of Regression:\n\n ${issue.description || '_[What happens now in the regression]_'}\n`;
+    let h2Expected = '### Expected Behavior:\n\n_[What the correct behavior should be]_\n\n';
+    let h3stepstoRepro = '#### STEPS TO REPRODUCE';
+    let reportVideo = `**View full Bugsee session w/video at:** ${issue.url}\n\n`;
+    let stepsCount = '**Repro Steps**\n 1.\n 2.\n 3.\n 4.\n\n\n';
+  	let bugReference = '**Date:** ${issue.created_on}\n**Commit:** _[xxxxxxx]_\n**Additional Notes:**' '\n\n';
+  	let bugTemplateRef = `_Use the Bug Template to Finish Your Report Details:_ #157825704 **_OR_** #158304773\n\n\n`;
+ 
+// Change Summary based on the type of the issue
+    if (issue.type == 'crash') {
+    	summary = CrashSummary + deviceData;
+    } else {
+    	summary = BugSummary + deviceData;
     }
 
-    if (issue.reporter) {
-        description += `Reported by ${issue.reporter}` || `Anonymous\n`;
-    }
+// Bugs and Crash Descriptions ==
+    let issue.description == description += h2CurrentEntry + h2Expected + h3stepstoRepro + reportVideo + stepsCount + bugReference + bugTemplateRef;
     
-   
-    description += `Device: ${device.manufacturer} ${device.model}\n`;
-    description += `OS: ${platform.version}, ${platform.build}\n\n`;
-    description += `View full Bugsee session at: ${issue.url}\n\n\n`;
-    description += `Reproduction Steps:\n 1.\n 2.\n 3.\n 4.\n 5.\n`;    
-  
+    if (issue.reporter) {
+        description += `_Reported by ${issue.reporter}_\n`;
+    } else {
+    	description += `Reported by Anonymous (_Bugsee ${issue.key}_)`;
+    }
+
+//Labels Rules ==    
+  if (platform.type == android) {
+    let labels = [android, dev];
+} else { 
+    let labels = [ios, dev];
+}
+
 //logic ends here
   
     return {
-        summary: summary,
+        summary: summary
         description: description,
-        labels: labels
+        labels: labels,
     };
   
   //end of output
@@ -117,6 +134,7 @@ function update(context, changes) {
 
         if (issue.reporter) {
             description += `Reported by ${issue.reporter}\n`;
+        }
         }
 
         description += `View full Bugsee session at: ${issue.url}`;
