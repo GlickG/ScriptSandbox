@@ -2,6 +2,7 @@
   "name": "ScriptSandbox",
   "version": "1.0.0",
   "description": "javascript sandbox",
+  "nodejs-license-file": "NO-LICENSE", 
   "main": "bugseepivotalrecipe.js",
   "scripts": {
     "build": "node bugseepivotalrecipe.js",
@@ -33,11 +34,14 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0"
-  },
+
+},
+
   "dependencies": {
     "babel-core": "^6.26.3",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.1",
+    "nodejs-license-file": "^4.0.0",
     "prettier": "^1.13.7"
   }
 }
