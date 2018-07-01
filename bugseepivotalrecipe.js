@@ -2,7 +2,7 @@ console.log("");
 //define input
 
 
-var input = {
+var context = {
     integration: {
         provider: 'github'   // provider name that current recipe is executed for
     },
