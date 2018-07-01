@@ -2,7 +2,7 @@
   "globals": {
     // Put things like jQuery, etc
     "jQuery": true,
-    "$": true
+    "$": true,
     "Dojo": true,
     "RequireJS": true,
     "Node.js": true,
@@ -35,6 +35,6 @@
         "ecmaVersion": 6,
         "sourceType": "module",
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
         };
 }
