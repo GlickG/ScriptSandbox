@@ -1,6 +1,5 @@
-console.log("input");
 //define input
-
+const commentMarks = "-------------"
 
 var context = {
     integration: {
@@ -8,7 +7,7 @@ var context = {
     },
     issue: {
         key: 'IOS-123', // Unique key of the issue,
-        summary: 'Something does not work', // Short summary of the issue
+        summary: '', // Short summary of the issue
         description: '', // Description of the issue,
         created_on: '2017-01-19 23:29:32.021Z', // Date of creation
         type: 'bug', // Type of the issue, 'bug', 'crash' or 'error'
@@ -41,7 +40,7 @@ var context = {
         }
     },
     platform: {
-        type: 'android', // Type: 'ios', 'android'
+        type: 'windows', // Type: 'ios', 'android'
         version: '7.2.3', // OS version
         build: 'BG1234', // OS build
         release: 'Nougat' // Release name
@@ -58,16 +57,18 @@ var context = {
     }
 };
 
-
 //define function
 function create(context) {
+    console.log(commentMarks + "BEGIN CTX" + commentMarks)
+    console.log(context)
+    console.log(commentMarks + "END CTX" + commentMarks)
   //(context) - input
     const issue = context.issue;
     const platform = context.platform;
     const device = context.device;
     const app = context.app;
     let summary;
-    let labels = [`android, dev`];
+    let labels = [`android`, `dev`];
 
     let description = issue.description || '';
 
@@ -86,10 +87,13 @@ function create(context) {
     let bugTemplateRef = `**_Use the Bug Template to Finish Your Report Details:**_' #157825704 _OR_ #158304773\n\n\n`;
 
 // Change Summary based on the type of the issue
+console.log(issue.type)
     if (issue.type == 'crash') {
-    	summary = CrashSummary + deviceData;
+        console.log("It was a crash!!!!!!!")
+        summary = CrashSummary + deviceData;
     } else {
-    	summary = BugSummary + deviceData;
+        console.log("It was not a crash!!!!!!!")
+        summary = BugSummary + deviceData;
     };
 
 // Bugs and Crash Descriptions ==
@@ -98,25 +102,24 @@ function create(context) {
     if (issue.reporter) {
         description += `_Reported by ${issue.reporter}_\n`;
     } else {
-    	description += `Reported by Anonymous (_Bugsee ${issue.key}_)`;
+        description += `Reported by Anonymous (_Bugsee ${issue.key}_)`;
     }
 
 //Labels Rules ==    
-  if (platform.type == android) {
-    let labels = [android, dev];
-} else { 
-    let labels = [ios, dev];
-}
+      if (platform.type == `android`) {
+        console.log("It is an android")
+        let labels = [`android`, `dev`];
+    } else if (platform.type == 'ios') { 
+        console.log("It is an ios")
+        let labels = [`ios`, `dev`];
+    }
 
-//logic ends here
-  
     return {
         summary: summary,
         description: description,
         labels: labels,
     };
-  
-  //end of output
+}
 
 function update(context, changes) {
     const issue = context.issue;
@@ -126,16 +129,15 @@ function update(context, changes) {
     const result = {};
 
     if (changes.description) {
-        let description = changes.description.to;
+        let description = changes.description.to || '';
 
         if (description) {
             // Add two newlines to separate other data from the description
             description += '\n\n';
-        
+        }
 
         if (issue.reporter) {
             description += `Reported by ${issue.reporter}\n`;
-        }
         }
 
         description += `View full Bugsee session at: ${issue.url}`;
@@ -144,25 +146,31 @@ function update(context, changes) {
 
     if (changes.summary) {
         result.summary = `${issue.key}: ${changes.summary.to || 'No summary'} [Bugsee]`;
+    } else {
+    }
+
+    if (changes.state) {
+        // Override state with a specific value, otherwise it will be mapped
+        // automatically from Bugsee issue state ('open', 'closed')
+        // result.state = 'completed';
     }
 
     return {
         issue: {
-            custom: { //none
-        
-        }
-
-    },   
+            custom: {
+                // Optional
+            }
+        },
         changes: result
     };
-
 }
 
 
 //run by passing input into function
 
-var output = create(input)
+var output = create(context);
 
 //print output
-
-console.log(output)
+console.log(commentMarks + "BEGIN OUPUT" + commentMarks)
+console.log(output);
+console.log(commentMarks + "END OUPUT" + commentMarks)
