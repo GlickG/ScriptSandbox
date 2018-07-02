@@ -69,6 +69,9 @@ function create(context) {
     let summary;
     let labels = [`android, dev`];
 
+    let description = issue.description || '';
+
+
 //String Shortcuts for Summary
     let CrashSummary = `**${platform.type} Crash:** ${issue.summary || 'Summarize what happened in two lines or less'}`;
     let BugSummary =   `**${platform.type} Bug:** ${issue.summary || 'Summarize what happened in two lines or less'}`;
@@ -114,7 +117,6 @@ function create(context) {
     };
   
   //end of output
-}
 
 function update(context, changes) {
     const issue = context.issue;
@@ -153,6 +155,8 @@ function update(context, changes) {
     },   
         changes: result
     };
+
+}
 
 
 //run by passing input into function
