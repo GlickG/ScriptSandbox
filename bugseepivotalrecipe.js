@@ -1,4 +1,4 @@
-console.log("");
+console.log("input");
 //define input
 
 
@@ -103,7 +103,7 @@ function create(context) {
     let labels = [android, dev];
 } else { 
     let labels = [ios, dev];
-};
+}
 
 //logic ends here
   
@@ -124,12 +124,12 @@ function update(context, changes) {
     const result = {};
 
     if (changes.description) {
-        let description = changes.description.to || '';
+        let description = changes.description.to;
 
         if (description) {
             // Add two newlines to separate other data from the description
             description += '\n\n';
-        }
+        
 
         if (issue.reporter) {
             description += `Reported by ${issue.reporter}\n`;
@@ -144,21 +144,16 @@ function update(context, changes) {
         result.summary = `${issue.key}: ${changes.summary.to || 'No summary'} [Bugsee]`;
     }
 
-    if (changes.state) {
-        // Override state with a specific value, otherwise it will be mapped
-        // automatically from Bugsee issue state ('open', 'closed')
-        // result.state = 'completed';
-    }
-
     return {
         issue: {
-            custom: {
-                // Optional
-            }
-        },
+            custom: { //none
+        
+        }
+
+    },   
         changes: result
     };
-}
+
 
 //run by passing input into function
 
