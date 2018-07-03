@@ -59,9 +59,6 @@ var context = {
 
 //define function
 function create(context) {
-    console.log(commentMarks + "BEGIN CTX" + commentMarks)
-    console.log(context)
-    console.log(commentMarks + "END CTX" + commentMarks)
   //(context) - input
     const issue = context.issue;
     const platform = context.platform;
@@ -71,7 +68,10 @@ function create(context) {
     let labels = [`android`, `dev`];
 
     let description = issue.description || '';
-
+     if (description) {
+        // Add two newlines to separate other data from the description
+        description += '\n\n';
+}
 
 //String Shortcuts for Summary
     let CrashSummary = `**${platform.type} Crash:** ${issue.summary || 'Summarize what happened in two lines or less'}`;
@@ -87,17 +87,13 @@ function create(context) {
     let bugTemplateRef = `**_Use the Bug Template to Finish Your Report Details:**_' #157825704 _OR_ #158304773\n\n\n`;
 
 // Change Summary based on the type of the issue
-console.log(issue.type)
     if (issue.type == 'crash') {
-        console.log("It was a crash!!!!!!!")
         summary = CrashSummary + deviceData;
-    } else {
-        console.log("It was not a crash!!!!!!!")
-        summary = BugSummary + deviceData;
-    };
+    } else {        summary = BugSummary + deviceData;
+    }
 
 // Bugs and Crash Descriptions ==
-    description += `h2CurrentEntry + h2Expected + h3stepstoRepro + reportVideo + stepsCount + bugTemplateRef`;
+    description += h2CurrentEntry + h2Expected + h3stepstoRepro + reportVideo + stepsCount + bugTemplateRef;
     
     if (issue.reporter) {
         description += `_Reported by ${issue.reporter}_\n`;
@@ -107,10 +103,8 @@ console.log(issue.type)
 
 //Labels Rules ==    
       if (platform.type == `android`) {
-        console.log("It is an android")
         let labels = [`android`, `dev`];
     } else if (platform.type == 'ios') { 
-        console.log("It is an ios")
         let labels = [`ios`, `dev`];
     }
 
@@ -164,13 +158,3 @@ function update(context, changes) {
         changes: result
     };
 }
-
-
-//run by passing input into function
-
-var output = create(context);
-
-//print output
-console.log(commentMarks + "BEGIN OUPUT" + commentMarks)
-console.log(output);
-console.log(commentMarks + "END OUPUT" + commentMarks)
